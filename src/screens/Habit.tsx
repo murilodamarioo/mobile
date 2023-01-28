@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { Loading } from "../components/Loading";
 import { api } from "../lib/axios";
 import { generateProgressPercentage } from "../utils/generate-progress-percentage";
+import { HabitEmpty } from "../components/HabitEmpty";
 
 interface Params {
     date: string;
@@ -92,7 +93,7 @@ export function Habit() {
 
                 <View className="mt-6">
                     {
-                        dayInfo?.possibleHabits &&
+                        dayInfo?.possibleHabits ?
                         dayInfo?.possibleHabits.map(habit => (
                             <CheckBox 
                                 key={habit.id}
@@ -101,6 +102,8 @@ export function Habit() {
                                 onPress={() => handleToggleHabit(habit.id)}
                             />
                         ))
+                        :
+                        <HabitEmpty />
                     }
                 </View>
             </ScrollView>
